@@ -15,7 +15,6 @@ export default function Footer() {
               solutions for purchase and refinance.
             </p>
 
-
             <p className="text-xs text-gray-200 mt-4">NMLS #2707715</p>
             <a
               href="https://www.nmlsconsumeraccess.org/"
@@ -25,6 +24,7 @@ export default function Footer() {
             >
               NMLS Consumer Access
             </a>
+
             {/* ✅ Equal Housing Opportunity Logo */}
             <div className="mt-4 flex flex-col items-start">
               <img
@@ -75,13 +75,27 @@ export default function Footer() {
                 <MapPin className="w-5 h-5 text-white mt-1 flex-shrink-0" />
                 <span>5900 Balcones Dr #17422 Austin, TX 78731</span>
               </li>
+
+              {/* ✅ Clickable Phone Number */}
               <li className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-white flex-shrink-0" />
-                <span>(470) 706-5858</span>
+                <a
+                  href="tel:+14707065858"
+                  className="hover:text-gray-300 transition"
+                >
+                  (470) 706-5858
+                </a>
               </li>
+
+              {/* ✅ Clickable Email */}
               <li className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-white flex-shrink-0" />
-                <span>karthik@karthikmortgage.com</span>
+                <a
+                  href="mailto:karthik@karthikmortgage.com"
+                  className="hover:text-gray-300 transition"
+                >
+                  karthik@karthikmortgage.com
+                </a>
               </li>
             </ul>
 
