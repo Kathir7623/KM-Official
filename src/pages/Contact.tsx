@@ -92,7 +92,7 @@ export default function Contact() {
                   If you're ready to get started, you can begin your application online right now. It's fast, secure, and you can save your progress.
                 </p>
                 <a
-                  href="https://rammtg.my1003app.com/2507848/register"
+                  href="https://www.karthikmortgage.com/apply-now"
                   className="inline-flex items-center text-[#ED7A1C] font-semibold hover:text-[#D66A0C]"
                 >
                   Start Your Application <Send className="ml-2 w-4 h-4" />

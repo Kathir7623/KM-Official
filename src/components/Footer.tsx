@@ -1,5 +1,4 @@
 import { MapPin, Phone, Mail } from "lucide-react";
-import logo from "../images/logo.png";
 import SocialIcons from "./SocialIcons";
 import FloatingWhatsApp from "./Floatingwhats"; // ✅ fixed import path
 
@@ -8,14 +7,16 @@ export default function Footer() {
     <>
       <footer className="bg-[#B84E0F] text-white relative">
         {/* Main Footer Content */}
-        <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Logo & About */}
           <div className="space-y-4">
             <p className="text-sm leading-relaxed text-gray-100">
               Your trusted partner in home loans. We simplify the mortgage process with personalized
               solutions for purchase and refinance.
             </p>
-            <p className="text-xs text-gray-200">NMLS #2707715</p>
+
+
+            <p className="text-xs text-gray-200 mt-4">NMLS #2707715</p>
             <a
               href="https://www.nmlsconsumeraccess.org/"
               target="_blank"
@@ -24,6 +25,17 @@ export default function Footer() {
             >
               NMLS Consumer Access
             </a>
+            {/* ✅ Equal Housing Opportunity Logo */}
+            <div className="mt-4 flex flex-col items-start">
+              <img
+                src="https://d2vfmc14ehtaht.cloudfront.net/images/eoh-logo.svg?format=webp"
+                alt="Equal Housing Opportunity"
+                className="w-[80px] h-auto object-contain mb-2"
+              />
+              <p className="text-xs text-gray-200">
+                Equal Housing Opportunity
+              </p>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -85,7 +97,7 @@ export default function Footer() {
         </div>
       </footer>
 
-      {/* ✅ Floating WhatsApp Icon - visible on all pages */}
+      {/* ✅ Floating WhatsApp Icon */}
       <FloatingWhatsApp />
     </>
   );

@@ -13,12 +13,10 @@ export default function Navigation() {
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (
-        learningRef.current && !learningRef.current.contains(e.target as Node)
-      ) setLearningCenterOpen(false);
-      if (
-        aboutRef.current && !aboutRef.current.contains(e.target as Node)
-      ) setAboutOpen(false);
+      if (learningRef.current && !learningRef.current.contains(e.target as Node))
+        setLearningCenterOpen(false);
+      if (aboutRef.current && !aboutRef.current.contains(e.target as Node))
+        setAboutOpen(false);
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -27,19 +25,21 @@ export default function Navigation() {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <img
-            src={logo}
-            alt="Karthik Mortgage Logo"
-            className="h-10 w-auto object-contain lg:h-12"
-          />
+          {/* ✅ Clickable Logo */}
+          <a href="/" className="flex items-center">
+            <img
+              src={logo}
+              alt="Karthik Mortgage Logo"
+              className="h-10 w-auto object-contain lg:h-12 cursor-pointer"
+            />
+          </a>
 
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center space-x-8">
-            <a href="/" className="text-gray-700 hover:text-[#ED7A1C] font-medium">Buy a Home</a>
+            <a href="/buy-home" className="text-gray-700 hover:text-[#ED7A1C] font-medium">Buy a Home</a>
             <a href="/calculator" className="text-gray-700 hover:text-[#ED7A1C] font-medium">Mortgage Calculator</a>
 
             {/* Learning Center Dropdown */}

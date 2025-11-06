@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 // Import all pages
 import Home from "../pages/Home";
-import BuyHome from "../pages/BuyHome";
+import BuyHome from "../pages/BuyHome"; // ✅ Add this
 import Calculator from "../pages/Calculator";
 import LoanPrograms from "../pages/LoanPrograms";
 import LoanProcess from "../pages/LoanProcess";
@@ -13,8 +13,8 @@ import Testimonials from "../pages/Testimonials";
 import Contact from "../pages/Contact";
 import Reviews from "../pages/Reviews";
 import Apply from "../pages/Apply";
-import Purchase from "../pages/purchase";
-import Refinance from "../pages/refinane"; // double-check your file name
+import Purchase from "../pages/purchase"; 
+import Refinance from "../pages/refinane"; 
 
 export default function Router() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -30,6 +30,7 @@ export default function Router() {
     const originalPushState = window.history.pushState;
     const originalReplaceState = window.history.replaceState;
 
+    // Patch history methods to detect route changes
     window.history.pushState = function (...args) {
       originalPushState.apply(window.history, args as any);
       handleLocationChange();
@@ -40,6 +41,7 @@ export default function Router() {
       handleLocationChange();
     };
 
+    // Handle clicks on <a> links
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest("a");
@@ -62,9 +64,9 @@ export default function Router() {
     };
   }, []);
 
-  // 🔗 All your defined routes
   const routes: { [key: string]: JSX.Element } = {
     "/": <Home />,
+    "/buy-home": <BuyHome />,
     "/calculator": <Calculator />,
     "/learning/loan-programs": <LoanPrograms />,
     "/learning/loan-process": <LoanProcess />,
