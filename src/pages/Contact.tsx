@@ -9,14 +9,35 @@ export default function Contact() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // ⚠️ Replace this with your actual Google Apps Script URL
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbz09WJt4VItVY2PTEXH8cyNUkAGbH0zyDkF2Uw7FA5jKvCgL2yDpy6wJ_rCg9qv3e4a/exec';
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
+    setLoading(true);
+
+    try {
+      const response = await fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors', // important for Google Apps Script
+        headers: { 'Content-Type': 'application/json' },  
+        body: JSON.stringify(formData),
+      });
+
+      setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', message: '' });
-    }, 3000);
+
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 4000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an issue submitting your form. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -48,7 +69,7 @@ export default function Contact() {
             <div>
               <h2 className="text-3xl font-bold text-gray-800 mb-6">Get in Touch</h2>
               <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-                Have questions about mortgages, our process, or your specific situation? Fill out the form and we'll get back to you promptly. You can also reach us by phone or email.
+                Have questions about mortgages, our process, or your specific situation? Fill out the form and we'll get back to you promptly.
               </p>
 
               <div className="space-y-6">
@@ -84,19 +105,6 @@ export default function Contact() {
                     <p className="text-gray-700">Austin, TX 78731</p>
                   </div>
                 </div>
-              </div>
-
-              <div className="mt-8 bg-[#FFF5E6] p-6 rounded-lg border-l-4 border-[#ED7A1C]">
-                <h3 className="font-bold text-gray-800 mb-2">Ready to Apply?</h3>
-                <p className="text-gray-700 mb-4">
-                  If you're ready to get started, you can begin your application online right now. It's fast, secure, and you can save your progress.
-                </p>
-                <a
-                  href="https://www.karthikmortgage.com/apply-now"
-                  className="inline-flex items-center text-[#ED7A1C] font-semibold hover:text-[#D66A0C]"
-                >
-                  Start Your Application <Send className="ml-2 w-4 h-4" />
-                </a>
               </div>
             </div>
 
@@ -175,10 +183,12 @@ export default function Contact() {
 
                     <button
                       type="submit"
-                      className="w-full bg-[#ED7A1C] text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-[#D66A0C] transition-colors shadow-lg flex items-center justify-center"
+                      disabled={loading}
+                      className={`w-full ${
+                        loading ? 'bg-gray-400' : 'bg-[#ED7A1C] hover:bg-[#D66A0C]'
+                      } text-white px-8 py-4 rounded-md font-semibold text-lg transition-colors shadow-lg flex items-center justify-center`}
                     >
-                      <Send className="mr-2 w-5 h-5" />
-                      Send Message
+                      {loading ? 'Sending...' : <><Send className="mr-2 w-5 h-5" /> Send Message</>}
                     </button>
                   </form>
                 )}

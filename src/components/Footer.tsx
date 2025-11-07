@@ -107,7 +107,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="bg-[#9E3F0D] py-4 text-center text-sm text-gray-100">
-          © 2025 Karthik Mortgage. All rights reserved. NMLS #2707715. 
+          © 2025 Karthik Mortgage. All rights reserved. NMLS #2707715. Licensed in TX.
         </div>
       </footer>
 
