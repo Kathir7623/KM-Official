@@ -1,24 +1,22 @@
 import { useState, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-import { Plus, ChevronRight } from "lucide-react";
+import { Plus } from "lucide-react";
 
-export default function MortgageCalculator() {
-  const [price, setPrice] = useState(500000);
-  const [downPercent, setDownPercent] = useState(3);
+export default function RefinanceCalculator() {
+  const [loanAmount, setLoanAmount] = useState(100000);
   const [interestRate, setInterestRate] = useState(6.2);
   const [loanTerm, setLoanTerm] = useState(30);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   // Advanced fields
-  const [annualInsurance, setAnnualInsurance] = useState(5000);
-  const [annualTaxes, setAnnualTaxes] = useState(17660);
+  const [annualInsurance, setAnnualInsurance] = useState(2500);
+  const [annualTaxes, setAnnualTaxes] = useState(9000);
   const [monthlyHOA, setMonthlyHOA] = useState(0);
-  const [showAdvanced, setShowAdvanced] = useState(false);
 
   const COLORS = ["#26B5F7", "#F8C630", "#2BC79C", "#E66B84"];
 
-  const loanAmount = price - (downPercent / 100) * price;
-
+  // Core calculation
   useEffect(() => {
     const principal = loanAmount;
     const monthlyRate = interestRate / 100 / 12;
@@ -28,39 +26,31 @@ export default function MortgageCalculator() {
       (principal * monthlyRate * Math.pow(1 + monthlyRate, n)) /
       (Math.pow(1 + monthlyRate, n) - 1);
 
-    // Advanced costs added
     const totalMonthly =
       pAndI + annualInsurance / 12 + annualTaxes / 12 + monthlyHOA;
 
     setMonthlyPayment(totalMonthly);
-  }, [
-    price,
-    downPercent,
-    interestRate,
-    loanTerm,
-    annualInsurance,
-    annualTaxes,
-    monthlyHOA,
-  ]);
+  }, [loanAmount, interestRate, loanTerm, annualInsurance, annualTaxes, monthlyHOA]);
 
   const pAndI = monthlyPayment - (annualInsurance / 12 + annualTaxes / 12 + monthlyHOA);
+
   const data = [
     { name: "Principal & Interest", value: pAndI },
     { name: "Taxes & HOA", value: annualTaxes / 12 + monthlyHOA },
     { name: "Hazard Insurance", value: annualInsurance / 12 },
+    { name: "Mortgage Insurance", value: 0 },
   ];
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-10 px-4">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-6xl border border-gray-200">
         <div className="grid md:grid-cols-2 gap-10">
-          {/* LEFT: Loan Details */}
+          {/* LEFT PANEL */}
           <div>
             <h2 className="text-2xl font-semibold text-gray-700 mb-6">
               Loan Details
             </h2>
 
-            {/* Loan Type + Term */}
             <div className="flex gap-4 mb-6">
               <div className="flex-1">
                 <label className="block text-sm text-gray-500 mb-1">Loan Type</label>
@@ -70,6 +60,7 @@ export default function MortgageCalculator() {
                   <option>VA</option>
                 </select>
               </div>
+
               <div className="flex-1">
                 <label className="block text-sm text-gray-500 mb-1">Term</label>
                 <select
@@ -85,39 +76,20 @@ export default function MortgageCalculator() {
               </div>
             </div>
 
-            {/* Property Price */}
+            {/* Loan Amount */}
             <div className="mb-6">
-              <label className="block text-sm text-gray-500 mb-1">Property Price</label>
+              <label className="block text-sm text-gray-500 mb-1">Loan Amount</label>
               <div className="text-gray-700 text-sm mb-1">
-                ${price.toLocaleString()}
+                ${loanAmount.toLocaleString()}
               </div>
               <input
                 type="range"
                 min="50000"
                 max="2000000"
-                step="10000"
-                value={price}
-                onChange={(e) => setPrice(Number(e.target.value))}
-                className="w-full accent-blue-600"
-              />
-            </div>
-
-            {/* Down Payment */}
-            <div className="mb-6">
-              <label className="block text-sm text-gray-500 mb-1">
-                Down Payment ({downPercent}%)
-              </label>
-              <div className="text-gray-700 text-sm mb-1">
-                ${((price * downPercent) / 100).toLocaleString()}
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="50"
-                step="1"
-                value={downPercent}
-                onChange={(e) => setDownPercent(Number(e.target.value))}
-                className="w-full accent-blue-600"
+                step="5000"
+                value={loanAmount}
+                onChange={(e) => setLoanAmount(Number(e.target.value))}
+                className="w-full accent-gray-600"
               />
             </div>
 
@@ -133,11 +105,11 @@ export default function MortgageCalculator() {
                 step="0.1"
                 value={interestRate}
                 onChange={(e) => setInterestRate(Number(e.target.value))}
-                className="w-full accent-blue-600"
+                className="w-full accent-gray-600"
               />
             </div>
 
-            {/* ADVANCED */}
+            {/* Advanced Button */}
             <button
               onClick={() => setShowAdvanced(!showAdvanced)}
               className="flex items-center gap-2 border rounded-md px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-100 mb-4"
@@ -148,35 +120,19 @@ export default function MortgageCalculator() {
 
             {showAdvanced && (
               <div className="bg-gray-100 rounded-xl p-5 mb-6 shadow-sm">
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="font-semibold text-gray-600">Advanced Details</h3>
-                  <button
-                    className="text-sm text-gray-500 flex items-center gap-1"
-                    onClick={() => setShowAdvanced(false)}
-                  >
-                    hide <ChevronRight size={14} />
-                  </button>
-                </div>
+                <h3 className="font-semibold text-gray-600 mb-3">Advanced Details</h3>
 
                 {/* Annual Insurance */}
                 <div className="mb-4">
                   <label className="block text-sm text-gray-500 mb-1">
                     Annual Insurance
                   </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="number"
-                      value={annualInsurance}
-                      onChange={(e) => setAnnualInsurance(Number(e.target.value))}
-                      className="w-1/2 border rounded-lg p-2"
-                    />
-                    <input
-                      type="number"
-                      value={((annualInsurance / price) * 100).toFixed(2)}
-                      readOnly
-                      className="w-1/2 border rounded-lg p-2 text-right text-gray-500 bg-gray-50"
-                    />
-                  </div>
+                  <input
+                    type="number"
+                    value={annualInsurance}
+                    onChange={(e) => setAnnualInsurance(Number(e.target.value))}
+                    className="w-full border rounded-lg p-2"
+                  />
                 </div>
 
                 {/* Annual Taxes */}
@@ -184,20 +140,12 @@ export default function MortgageCalculator() {
                   <label className="block text-sm text-gray-500 mb-1">
                     Annual Taxes
                   </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="number"
-                      value={annualTaxes}
-                      onChange={(e) => setAnnualTaxes(Number(e.target.value))}
-                      className="w-1/2 border rounded-lg p-2"
-                    />
-                    <input
-                      type="number"
-                      value={((annualTaxes / price) * 100).toFixed(2)}
-                      readOnly
-                      className="w-1/2 border rounded-lg p-2 text-right text-gray-500 bg-gray-50"
-                    />
-                  </div>
+                  <input
+                    type="number"
+                    value={annualTaxes}
+                    onChange={(e) => setAnnualTaxes(Number(e.target.value))}
+                    className="w-full border rounded-lg p-2"
+                  />
                 </div>
 
                 {/* Monthly HOA */}
@@ -214,9 +162,14 @@ export default function MortgageCalculator() {
                 </div>
               </div>
             )}
+
+            {/* See Details Button */}
+            <button className="bg-gray-800 text-white font-medium rounded-full py-2 px-6 mt-6 hover:bg-gray-700 shadow-md transition">
+              See Details
+            </button>
           </div>
 
-          {/* RIGHT: Chart */}
+          {/* RIGHT PANEL */}
           <div>
             <h2 className="text-2xl font-semibold text-gray-700 mb-4">
               Monthly Payments Breakdown
@@ -246,7 +199,8 @@ export default function MortgageCalculator() {
               </p>
               <p className="text-sm text-gray-500 mb-4">Your Payment</p>
 
-              <div className="grid grid-cols-2 gap-y-2 text-sm text-gray-700 w-full mt-6 pt-16">
+              {/* Breakdown */}
+              <div className="grid grid-cols-2 gap-y-2 text-sm text-gray-700 w-full mt-6">
                 <div className="flex items-center gap-2">
                   <span className="w-4 h-2 rounded-full bg-[#26B5F7]" />
                   Principal & Interest: ${pAndI.toFixed(2)}

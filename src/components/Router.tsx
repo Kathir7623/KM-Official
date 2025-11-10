@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 // Import all pages
 import Home from "../pages/Home";
-import BuyHome from "../pages/BuyHome"; // ✅ Add this
+import BuyHome from "../pages/BuyHome"; 
 import Calculator from "../pages/Calculator";
 import LoanPrograms from "../pages/LoanPrograms";
 import LoanProcess from "../pages/LoanProcess";
