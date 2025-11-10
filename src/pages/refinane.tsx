@@ -11,29 +11,33 @@ export default function Refinance() {
             Home Refinance Loans
           </h1>
           <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Refinancing your home can open doors to financial freedom — lower
-            monthly payments, pay off your loan faster, or access cash when you
-            need it most. At{" "}
+            Refinancing your home can unlock new financial opportunities — lower
+            your monthly payments, shorten your loan term, or access extra cash
+            when you need it most. At{" "}
             <span className="text-[#ED7A1C] font-semibold">
               Karthik Mortgage
             </span>
-            , we make refinancing simple, transparent, and tailored to your
-            financial goals.
+            , we make refinancing simple, transparent, and fully customized to
+            your financial goals.
           </p>
         </div>
 
         {/* Image + Text Section */}
         <div className="grid md:grid-cols-2 gap-10 items-center mb-16">
-          <img src={purchaseImg} alt="Purchase" className="rounded-2x1 shadow-lg w-[600px] h-auto" />
+          <img
+            src={purchaseImg}
+            alt="Refinance"
+            className="rounded-2xl shadow-lg w-[600px] h-auto"
+          />
           <div>
             <h2 className="text-3xl font-bold text-gray-800 mb-4">
               Save More, Stress Less
             </h2>
             <p className="text-gray-700 leading-relaxed mb-6">
-              Interest rates and financial goals change over time — and your
-              mortgage should keep up. Refinancing helps you reduce your rate,
-              consolidate debt, or tap into your home’s equity for renovations,
-              education, or emergencies.
+              Interest rates and personal goals evolve over time — your mortgage
+              should too. Refinancing helps you lower your rate, consolidate
+              debt, or tap into your home’s equity for renovations, education,
+              or unexpected expenses.
             </p>
             <a
               href="/apply"
@@ -54,30 +58,31 @@ export default function Refinance() {
             <li className="flex items-start">
               <CheckCircle className="w-6 h-6 text-[#ED7A1C] mr-3 mt-0.5" />
               <p className="text-gray-700">
-                <span className="font-semibold">Lower Your Monthly Payment:</span>{" "}
-                Take advantage of current low interest rates to reduce expenses.
+                <span className="font-semibold">Lower Monthly Payments:</span>{" "}
+                Take advantage of competitive interest rates to reduce your
+                financial burden.
               </p>
             </li>
             <li className="flex items-start">
               <CheckCircle className="w-6 h-6 text-[#ED7A1C] mr-3 mt-0.5" />
               <p className="text-gray-700">
-                <span className="font-semibold">Shorten Your Loan Term:</span>{" "}
-                Pay off your mortgage faster and save thousands in interest.
+                <span className="font-semibold">Pay Off Sooner:</span>{" "}
+                Shorten your loan term and save thousands in long-term interest.
               </p>
             </li>
             <li className="flex items-start">
               <CheckCircle className="w-6 h-6 text-[#ED7A1C] mr-3 mt-0.5" />
               <p className="text-gray-700">
-                <span className="font-semibold">Cash-Out Option:</span> Use your
-                home equity for home improvements, college tuition, or
+                <span className="font-semibold">Cash-Out Refinance:</span> Use
+                your home equity to fund major life goals, from home upgrades to
                 debt consolidation.
               </p>
             </li>
             <li className="flex items-start">
               <CheckCircle className="w-6 h-6 text-[#ED7A1C] mr-3 mt-0.5" />
               <p className="text-gray-700">
-                <span className="font-semibold">No Hidden Fees:</span> Transparent
-                rates and clear communication throughout the entire process.
+                <span className="font-semibold">No Hidden Fees:</span> Enjoy a
+                transparent process with clear communication at every step.
               </p>
             </li>
           </ul>
@@ -95,8 +100,8 @@ export default function Refinance() {
                 Rate-and-Term Refinance
               </h4>
               <p className="text-gray-600">
-                Replace your current mortgage with one that offers a better rate
-                or shorter term.
+                Replace your existing mortgage with one that has a better rate
+                or shorter term — saving you money over time.
               </p>
             </div>
 
@@ -106,8 +111,8 @@ export default function Refinance() {
                 Cash-Out Refinance
               </h4>
               <p className="text-gray-600">
-                Tap into your home’s equity and get funds for major life goals or
-                unexpected expenses.
+                Convert your home’s equity into usable cash for major expenses
+                like renovations, education, or paying down debt.
               </p>
             </div>
 
@@ -117,8 +122,8 @@ export default function Refinance() {
                 FHA Streamline Refinance
               </h4>
               <p className="text-gray-600">
-                Simplified process for homeowners with existing FHA loans —
-                minimal paperwork and no appraisal needed.
+                Designed for homeowners with existing FHA loans — featuring a
+                simplified process, no appraisal, and minimal documentation.
               </p>
             </div>
           </div>
@@ -130,8 +135,8 @@ export default function Refinance() {
             Take Control of Your Mortgage Today
           </h3>
           <p className="text-gray-600 mb-6">
-            Whether you're looking to lower your rate, reduce your term, or get
-            cash out — we’re here to make it happen.
+            Whether you're aiming to lower your rate, shorten your term, or get
+            cash out — our team is here to make refinancing effortless.
           </p>
           <a
             href="/apply"

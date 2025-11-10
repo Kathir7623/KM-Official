@@ -32,9 +32,6 @@ export default function Footer() {
                 alt="Equal Housing Opportunity"
                 className="w-[80px] h-auto object-contain mb-2"
               />
-              <p className="text-xs text-gray-200">
-                Equal Housing Opportunity
-              </p>
             </div>
           </div>
 

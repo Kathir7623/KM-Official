@@ -1,4 +1,4 @@
-import { Star, Quote, ArrowRight } from 'lucide-react';
+import { Star, Quote, ArrowRight } from "lucide-react";
 
 interface TestimonialProps {
   name: string;
@@ -26,48 +26,48 @@ function Testimonial({ name, text, rating }: TestimonialProps) {
 export default function Testimonials() {
   const testimonials = [
     {
-      name: 'Suresh & Anjali P.',
-      text: 'Karthik made the entire process effortless. He answered every question, guided us through paperwork, and got us a fantastic rate! We felt supported every step of the way.',
+      name: "Jagadish Tippini",
+      text: "Karthik and his team @ Karthik Mortgage Inc. were a dream to work with—Super communicative and on top of everything from start to finish. He was always helpful and never seemed frustrated. If you're thinking about refinancing, I can't recommend him enough! Thanks so much Karthik!",
       rating: 5,
     },
     {
-      name: 'Ravi K.',
-      text: 'I refinanced with Karthik Mortgage and saved over $350 per month. The service was exceptional and the process was much faster than I expected. Highly recommend!',
+      name: "Mahalingam Ramasamy",
+      text: "I had an outstanding experience working with Karthik for my recent home loan. From the initial application to the final closing, the entire process was incredibly smooth and efficient. Karthik is on top of every detail, ensuring all deadlines were met without any hitches. I highly recommend Karthik to anyone looking for a hassle-free lending experience.",
       rating: 5,
     },
     {
-      name: 'Priya D.',
-      text: 'As first-time buyers, we were nervous about the process. Karthik explained everything clearly and helped us close early! We couldn\'t be happier with our new home.',
+      name: "Sriram Ramesh",
+      text: "Entire refinance process was very smooth, super communicative, always available for any clarifications.",
       rating: 5,
     },
     {
-      name: 'Michael T.',
-      text: 'Professional, knowledgeable, and always available to answer questions. Karthik got us approved quickly and found us a better rate than we thought possible.',
+      name: "Saidulu Sai",
+      text: "Karthik has provided a great service, explained all details and approachable for all your queries.",
       rating: 5,
     },
     {
-      name: 'Sarah & James L.',
-      text: 'We had been turned down by other lenders, but Karthik found a solution that worked for us. His expertise and persistence made our dream of homeownership a reality.',
+      name: "Ramasamy Muthusamy",
+      text: "Excellent Service. Karthik is detailed always and provides best service.",
       rating: 5,
     },
     {
-      name: 'David M.',
-      text: 'Switching from my previous lender to Karthik Mortgage was the best decision. The communication was outstanding, and I closed on time with no surprises.',
+      name: "Ashok Peddi",
+      text: "Detailed explanation!!!",
       rating: 5,
     },
     {
-      name: 'Lisa W.',
-      text: 'Karthik took the time to explain all our options and helped us choose the best loan for our situation. We felt like we were his only client, even though I know he\'s busy!',
+      name: "Sathiyamoorthy AN",
+      text: "Had a great experience with the Karthik Mortgage for my refinance. Karthik and team provided end to end support and easy working with them. They followed up on time and showed patience even when I was late with documents. Closing was an easy process. Thank you!",
       rating: 5,
     },
     {
-      name: 'Robert & Emily S.',
-      text: 'From pre-approval to closing, everything was seamless. Karthik kept us informed throughout and made buying our first home an exciting experience rather than a stressful one.',
+      name: "Ravindra Babu",
+      text: "Karthik is knowledgeable, friendly and responsive. Worth talking to him if you have any questions about refinancing. Strongly recommend him!",
       rating: 5,
     },
     {
-      name: 'Amanda K.',
-      text: 'I refinanced to consolidate debt and lower my payment. Karthik was honest about my options and helped me save thousands. I tell everyone about his service!',
+      name: "Srikant Konnur",
+      text: "Great team to work with! They follow up consistently and make sure there are no hiccups during the closing process. Fair and transparent transactions.",
       rating: 5,
     },
   ];
@@ -145,3 +145,4 @@ export default function Testimonials() {
     </div>
   );
 }
+  

@@ -1,171 +1,116 @@
-import { Star, ExternalLink, ArrowRight } from 'lucide-react';
+import { Star } from "lucide-react";
 
-export default function Reviews() {
+export default function GoogleReviews() {
+  const reviews = [
+    {
+      name: "Jagadish Tippini",
+      text: "Karthik and his team @ Karthik Mortgage Inc. were a dream to work with—Super communicative and on top of everything from start to finish. He was always helpful and never seemed frustrated. If you're thinking about refinancing, I can't recommend him enough! Thanks so much Karthik!",
+      rating: 5,
+    },
+    {
+      name: "Mahalingam Ramasamy",
+      text: "I had an outstanding experience working with Karthik for my recent home loan. From the initial application to the final closing, the entire process was incredibly smooth and efficient. Karthik is on top of every detail, ensuring all deadlines were met without any hitches. What can often be a stressful process was made simple and straightforward thanks to their professionalism and expertise. I highly recommend Karthik to anyone looking for a hassle-free lending experience.",
+      rating: 5,
+    },
+    {
+      name: "Sriram Ramesh",
+      text: "Entire refinance process was very smooth, super communicative, always available for any clarifications.",
+      rating: 5,
+    },
+    {
+      name: "Saidulu Sai",
+      text: "Karthik has provided a great service, explained all details and approachable for all your queries.",
+      rating: 5,
+    },
+    {
+      name: "Ramasamy Muthusamy",
+      text: "Excellent Service. Karthik is detailed always and provides best service.",
+      rating: 5,
+    },
+    {
+      name: "Ashok Peddi",
+      text: "Detailed explanation!!!",
+      rating: 5,
+    },
+    {
+      name: "Sridhar P",
+      text: "Overall, working with Karthik and team was a good experience. I wish all the best and success in their future endeavors.",
+      rating: 5,
+    },
+    {
+      name: "Srikant Konnur",
+      text: "Great team to work with! They follow up consistently and make sure we don't experience any hiccups during the closing process. Fair and transparent transactions.",
+      rating: 5,
+    },
+    {
+      name: "Manoj Ramalingam",
+      text: "We were very fortunate to work with Karthik and his team for processing mortgage for our first home. The process was pretty smooth. Karthik took time to explain what to expect in the process. His team is knowledgeable, diligent in following up and provided guidance on document uploads and verification. The whole process got completed in couple of days and resulted in a smooth closing experience. Happy that we found the right partner to work with. Thank you Karthik & Team! Excellent job!",
+      rating: 5,
+    },
+    {
+      name: "Ravi Kura",
+      text: "Karthik and his team did an amazing job with refinance. Felt Karthik is very trustworthy and knowledgeable and highly responsive. Great working with him.",
+      rating: 5,
+    },
+    {
+      name: "Vadivelkumar Palanisamy",
+      text: "Recently I got opportunity to work with Karthik on my house home refinancing. He gave us very competitive interest compare to other lenders and he has in depth knowledge on the tax differentiation between different states. He is very transparent from starting to end. Thank you for all the help and wish you achieve great success!",
+      rating: 5,
+    },
+    {
+      name: "Sathiyamoorthy AN",
+      text: "Had a great experience with the Karthik Mortgage for my refinance. Karthik and team provided end to end support and easy working with them. They have followed up on time and have shown patience even when I was not turning documents back on time. They explained everything whenever I needed clarification and closing was such easy process. Thank you. Appreciated!",
+      rating: 5,
+    },
+    {
+      name: "Ravindra Babu",
+      text: "Karthik is knowledgeable no doubt about it. Worth try to talk with him if you have any questions with refinancing. He is so friendly as well and responsive. Strongly suggest him.",
+      rating: 5,
+    },
+  ];
+
   return (
-    <div className="min-h-screen">
-      <section className="bg-gradient-to-br from-[#FFF5E6] to-[#FFE8CC] py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-4xl mx-auto">
-            <Star className="w-16 h-16 text-[#ED7A1C] mx-auto mb-6 fill-current" />
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-800 mb-6 leading-tight">
-              See What Homeowners Are Saying About Us
-            </h1>
-            <p className="text-xl text-gray-700 leading-relaxed">
-              Check out verified reviews from satisfied clients on Google, Zillow, and Facebook to see why Karthik Mortgage is a trusted name in the mortgage industry.
-            </p>
-          </div>
-        </div>
-      </section>
+    <section className="min-h-screen py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 className="text-5xl font-bold text-gray-800 mb-10">
+          What Our Clients Say
+        </h1>
 
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="flex items-center justify-center mb-4">
-              <div className="flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-8 h-8 text-[#ED7A1C] fill-current" />
-                ))}
+        <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-8">
+          {reviews.map((review, i) => (
+            <div
+              key={i}
+              className="bg-[#FFFCEB] border border-gray-200 rounded-2xl shadow-md p-6 text-left hover:shadow-lg transition-all duration-300"
+            >
+              <div className="flex items-center mb-4">
+                <div className="bg-[#ED7A1C] text-white font-semibold text-xl w-12 h-12 flex items-center justify-center rounded-full mr-4">
+                  {review.name.charAt(0)}
+                </div>
+                <div>
+                  <h3 className="font-bold text-gray-800">{review.name}</h3>
+                  <div className="flex items-center">
+                    {[...Array(review.rating)].map((_, idx) => (
+                      <Star
+                        key={idx}
+                        className="w-4 h-4 text-[#ED7A1C] fill-current"
+                      />
+                    ))}
+                  </div>
+                </div>
+                <img
+                  src="https://cdn.trustindex.io/assets/platform/Google/icon.svg"
+                  alt="Google"
+                  className="ml-auto w-5 h-5"
+                />
               </div>
+
+              <p className="text-gray-700 text-sm leading-relaxed">
+                {review.text}
+              </p>
             </div>
-            <p className="text-3xl font-bold text-gray-800 mb-2">5.0 Average Rating</p>
-            <p className="text-lg text-gray-600">Based on 100+ verified reviews</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <a
-              href="https://www.google.com/maps"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white p-8 rounded-lg shadow-lg border-2 border-gray-200 hover:border-[#ED7A1C] hover:shadow-xl transition-all text-center group"
-            >
-              <div className="bg-[#FFF5E6] w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-[#ED7A1C] transition-colors">
-                <svg className="w-10 h-10" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    className="text-[#ED7A1C] group-hover:text-white"
-                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Google Reviews</h3>
-              <div className="flex items-center justify-center mb-2">
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-[#ED7A1C] fill-current" />
-                  ))}
-                </div>
-              </div>
-              <p className="text-gray-600 mb-4">5.0 rating with 50+ reviews</p>
-              <div className="flex items-center justify-center text-[#ED7A1C] font-semibold group-hover:text-[#D66A0C]">
-                Read Reviews <ExternalLink className="ml-2 w-4 h-4" />
-              </div>
-            </a>
-
-            <a
-              href="https://www.zillow.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white p-8 rounded-lg shadow-lg border-2 border-gray-200 hover:border-[#ED7A1C] hover:shadow-xl transition-all text-center group"
-            >
-              <div className="bg-[#FFF5E6] w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-[#ED7A1C] transition-colors">
-                <svg className="w-10 h-10" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    className="text-[#ED7A1C] group-hover:text-white"
-                    d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Zillow Reviews</h3>
-              <div className="flex items-center justify-center mb-2">
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-[#ED7A1C] fill-current" />
-                  ))}
-                </div>
-              </div>
-              <p className="text-gray-600 mb-4">5.0 rating with 30+ reviews</p>
-              <div className="flex items-center justify-center text-[#ED7A1C] font-semibold group-hover:text-[#D66A0C]">
-                Read Reviews <ExternalLink className="ml-2 w-4 h-4" />
-              </div>
-            </a>
-
-            <a
-              href="https://www.facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-white p-8 rounded-lg shadow-lg border-2 border-gray-200 hover:border-[#ED7A1C] hover:shadow-xl transition-all text-center group"
-            >
-              <div className="bg-[#FFF5E6] w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-[#ED7A1C] transition-colors">
-                <svg className="w-10 h-10" viewBox="0 0 24 24" fill="currentColor">
-                  <path
-                    className="text-[#ED7A1C] group-hover:text-white"
-                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Facebook Reviews</h3>
-              <div className="flex items-center justify-center mb-2">
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-[#ED7A1C] fill-current" />
-                  ))}
-                </div>
-              </div>
-              <p className="text-gray-600 mb-4">5.0 rating with 20+ reviews</p>
-              <div className="flex items-center justify-center text-[#ED7A1C] font-semibold group-hover:text-[#D66A0C]">
-                Read Reviews <ExternalLink className="ml-2 w-4 h-4" />
-              </div>
-            </a>
-          </div>
+          ))}
         </div>
-      </section>
-
-      <section className="py-16 bg-gradient-to-br from-[#FFF5E6] to-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white p-8 rounded-lg shadow-xl border-t-4 border-[#ED7A1C] text-center">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">What Makes Us Different?</h2>
-            <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-              Our consistently high ratings across all platforms reflect our commitment to exceptional service, clear communication, and putting our clients first. We don't just close loans — we build lasting relationships.
-            </p>
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="text-center">
-                <p className="text-4xl font-bold text-[#ED7A1C] mb-2">100+</p>
-                <p className="text-gray-700">Happy Clients</p>
-              </div>
-              <div className="text-center">
-                <p className="text-4xl font-bold text-[#ED7A1C] mb-2">5.0</p>
-                <p className="text-gray-700">Average Rating</p>
-              </div>
-              <div className="text-center">
-                <p className="text-4xl font-bold text-[#ED7A1C] mb-2">98%</p>
-                <p className="text-gray-700">Would Recommend</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">Ready to Experience 5-Star Service?</h2>
-          <p className="text-lg text-gray-700 mb-8 leading-relaxed">
-            Join our growing family of satisfied clients. Let's start your journey toward homeownership or refinancing today.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="/apply"
-              className="bg-[#ED7A1C] text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-[#D66A0C] transition-colors shadow-lg inline-flex items-center justify-center"
-            >
-              Apply Now <ArrowRight className="ml-2 w-5 h-5" />
-            </a>
-            <a
-              href="/testimonials"
-              className="bg-white text-[#ED7A1C] border-2 border-[#ED7A1C] px-8 py-4 rounded-md font-semibold text-lg hover:bg-[#FFF5E6] transition-colors shadow-lg"
-            >
-              Read More Testimonials
-            </a>
-          </div>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
