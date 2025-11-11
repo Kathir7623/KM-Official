@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-import { Plus } from "lucide-react";
+import { Plus, ChevronDown, ChevronUp } from "lucide-react";
 
 export default function ExtraPaymentCalculator() {
   const [loanAmount, setLoanAmount] = useState(300000);
@@ -13,11 +13,14 @@ export default function ExtraPaymentCalculator() {
   const [oneTimeMonth, setOneTimeMonth] = useState(12);
 
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+
   const [results, setResults] = useState({
     monthlyPayment: 0,
     newTermMonths: 0,
     interestSaved: 0,
     newTotalInterest: 0,
+    oldTotalInterest: 0,
   });
 
   const COLORS = ["#26B5F7", "#F8C630", "#2BC79C", "#E66B84"];
@@ -61,6 +64,7 @@ export default function ExtraPaymentCalculator() {
       newTermMonths,
       interestSaved,
       newTotalInterest,
+      oldTotalInterest,
     });
   }, [
     loanAmount,
@@ -88,7 +92,9 @@ export default function ExtraPaymentCalculator() {
 
             {/* Loan Amount */}
             <div className="mb-6">
-              <label className="block text-sm text-gray-500 mb-1">Loan Amount</label>
+              <label className="block text-sm text-gray-500 mb-1">
+                Loan Amount
+              </label>
               <div className="text-gray-700 text-sm mb-1">
                 ${loanAmount.toLocaleString()}
               </div>
@@ -121,7 +127,9 @@ export default function ExtraPaymentCalculator() {
 
             {/* Term */}
             <div className="mb-6">
-              <label className="block text-sm text-gray-500 mb-1">Term (Years)</label>
+              <label className="block text-sm text-gray-500 mb-1">
+                Term (Years)
+              </label>
               <select
                 value={loanTerm}
                 onChange={(e) => setLoanTerm(Number(e.target.value))}
@@ -189,9 +197,24 @@ export default function ExtraPaymentCalculator() {
             )}
 
             {/* See Details */}
-            <button className="bg-gray-800 text-white font-medium rounded-full py-2 px-6 mt-4 hover:bg-gray-700 shadow-md transition">
-              See Details
+            <button
+              onClick={() => setShowDetails(!showDetails)}
+              className="bg-gray-800 text-white font-medium rounded-full py-2 px-6 mt-4 hover:bg-gray-700 shadow-md transition flex items-center gap-2"
+            >
+              See Details {showDetails ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
             </button>
+
+            {/* Details Section */}
+            {showDetails && (
+              <div className="bg-gray-100 mt-6 p-4 rounded-xl border">
+                <h3 className="font-semibold text-gray-700 mb-3">Detailed Breakdown</h3>
+                <p><strong>Original Total Interest:</strong> ${results.oldTotalInterest.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                <p><strong>New Total Interest:</strong> ${results.newTotalInterest.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                <p><strong>Interest Saved:</strong> ${results.interestSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+                <p><strong>Loan Paid Off In:</strong> {(results.newTermMonths / 12).toFixed(1)} years</p>
+                <p><strong>Months Saved:</strong> {(loanTerm * 12 - results.newTermMonths).toFixed(0)} months</p>
+              </div>
+            )}
           </div>
 
           {/* RIGHT SIDE */}
@@ -220,7 +243,7 @@ export default function ExtraPaymentCalculator() {
               </ResponsiveContainer>
 
               <p className="text-center mt-[-150px] text-3xl font-bold text-gray-800">
-                ${(results.monthlyPayment).toFixed(2)}
+                ${results.monthlyPayment.toFixed(2)}
               </p>
               <p className="text-sm text-gray-500 mb-4">New Monthly Payment</p>
 
@@ -231,7 +254,9 @@ export default function ExtraPaymentCalculator() {
                 </p>
                 <p>
                   <strong>Total Interest Saved:</strong>{" "}
-                  ${results.interestSaved.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  ${results.interestSaved.toLocaleString(undefined, {
+                    maximumFractionDigits: 0,
+                  })}
                 </p>
               </div>
             </div>

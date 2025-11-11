@@ -1,268 +1,105 @@
-import { useState, useEffect } from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
-import { Plus, ChevronRight } from "lucide-react";
+import { Calculator, TrendingUp, DollarSign, PieChart, Percent, HelpCircle, BarChart3, PiggyBank, Coins, Briefcase, ArrowDownCircle } from "lucide-react";
 
-export default function MortgageCalculator() {
-  const [price, setPrice] = useState(500000);
-  const [downPercent, setDownPercent] = useState(3);
-  const [interestRate, setInterestRate] = useState(6.2);
-  const [loanTerm, setLoanTerm] = useState(30);
-  const [monthlyPayment, setMonthlyPayment] = useState(0);
+export default function CalculatorPage() {
+  const navigate = (path: string) => {
+    window.history.pushState({}, "", path);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  };
 
-  // Advanced fields
-  const [annualInsurance, setAnnualInsurance] = useState(5000);
-  const [annualTaxes, setAnnualTaxes] = useState(17660);
-  const [monthlyHOA, setMonthlyHOA] = useState(0);
-  const [showAdvanced, setShowAdvanced] = useState(false);
-
-  const COLORS = ["#26B5F7", "#F8C630", "#2BC79C", "#E66B84"];
-
-  const loanAmount = price - (downPercent / 100) * price;
-
-  useEffect(() => {
-    const principal = loanAmount;
-    const monthlyRate = interestRate / 100 / 12;
-    const n = loanTerm * 12;
-
-    const pAndI =
-      (principal * monthlyRate * Math.pow(1 + monthlyRate, n)) /
-      (Math.pow(1 + monthlyRate, n) - 1);
-
-    // Advanced costs added
-    const totalMonthly =
-      pAndI + annualInsurance / 12 + annualTaxes / 12 + monthlyHOA;
-
-    setMonthlyPayment(totalMonthly);
-  }, [
-    price,
-    downPercent,
-    interestRate,
-    loanTerm,
-    annualInsurance,
-    annualTaxes,
-    monthlyHOA,
-  ]);
-
-  const pAndI = monthlyPayment - (annualInsurance / 12 + annualTaxes / 12 + monthlyHOA);
-  const data = [
-    { name: "Principal & Interest", value: pAndI },
-    { name: "Taxes & HOA", value: annualTaxes / 12 + monthlyHOA },
-    { name: "Hazard Insurance", value: annualInsurance / 12 },
+  const calculators = [
+    {
+      name: "Mortgage Calculator",
+      description: "Estimate your monthly home loan payment.",
+      icon: <Calculator size={32} className="text-blue-500" />,
+      path: "/calculator/mortgage",
+    },
+    {
+      name: "Refinance Calculator",
+      description: "See if refinancing can save you money.",
+      icon: <TrendingUp size={32} className="text-green-500" />,
+      path: "/calculator/refinance",
+    },
+    {
+      name: "Extra Payment Calculator",
+      description: "Find out how extra payments shorten your loan term.",
+      icon: <DollarSign size={32} className="text-yellow-500" />,
+      path: "/calculator/extrapaymentcalculator",
+    },
+    {
+      name: "How much home can I afford?",
+      description: "Determine how much home you can afford.",
+      icon: <PieChart size={32} className="text-pink-500" />,
+      path: "/calculator/affordabilitycalculator",
+    },
+    {
+      name: "Principal Calculator",
+      description: "Calculate your principal and remaining balance.",
+      icon: <BarChart3 size={32} className="text-purple-500" />,
+      path: "/calculator/principalcalculator",
+    },
+    {
+      name: "Tax Benefits of Buying",
+      description: "Understand how much you could save in taxes.",
+      icon: <Coins size={32} className="text-red-500" />,
+      path: "/calculator/taxbenefitcalculator",
+    },
+    {
+      name: "What's my APR?",
+      description: "Understand your annual percentage rate cost.",
+      icon: <Percent size={32} className="text-indigo-500" />,
+      path: "/calculator/aprcalculator",
+    },
+    {
+      name: "Interest-Only Calculator",
+      description: "See your monthly payment for an interest-only loan.",
+      icon: <PiggyBank size={32} className="text-teal-500" />,
+      path: "/calculator/interestonlycalculator",
+    },
+    {
+      name: "Should I pay Points?",
+      description: "Find out if paying points makes sense for your loan.",
+      icon: <HelpCircle size={32} className="text-orange-500" />,
+      path: "/calculator/shouldipaypointscalculator",
+    },
+    {
+      name: "How much income to qualify?",
+      description: "Estimate income needed to qualify for a mortgage.",
+      icon: <Briefcase size={32} className="text-gray-500" />,
+      path: "/calculator/incometoqualify",
+    },
+    {
+      name: "Buydown Calculator",
+      description: "Understand how a rate buydown could affect your payments.",
+      icon: <ArrowDownCircle size={32} className="text-blue-600" />,
+      path: "/calculator/buydowncalculator",
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-10 px-4">
-      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-6xl border border-gray-200">
-        <div className="grid md:grid-cols-2 gap-10">
-          {/* LEFT: Loan Details */}
-          <div>
-            <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-              Loan Details
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center py-16 px-4">
+      <h1 className="text-4xl font-bold text-gray-800 mb-12">
+        Choose a Calculator
+      </h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
+        {calculators.map((calc, index) => (
+          <div
+            key={index}
+            onClick={() => navigate(calc.path)}
+            className="cursor-pointer bg-white p-8 rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 flex flex-col items-center"
+          >
+            <div className="p-4 bg-gray-100 rounded-full mb-4">{calc.icon}</div>
+            <h2 className="text-lg font-semibold text-gray-800 mb-2 text-center">
+              {calc.name}
             </h2>
-
-            {/* Loan Type + Term */}
-            <div className="flex gap-4 mb-6">
-              <div className="flex-1">
-                <label className="block text-sm text-gray-500 mb-1">Loan Type</label>
-                <select className="w-full border rounded-lg p-2">
-                  <option>Conventional</option>
-                  <option>FHA</option>
-                  <option>VA</option>
-                </select>
-              </div>
-              <div className="flex-1">
-                <label className="block text-sm text-gray-500 mb-1">Term</label>
-                <select
-                  value={loanTerm}
-                  onChange={(e) => setLoanTerm(Number(e.target.value))}
-                  className="w-full border rounded-lg p-2"
-                >
-                  <option value={15}>15 Years</option>
-                  <option value={20}>20 Years</option>
-                  <option value={25}>25 Years</option>
-                  <option value={30}>30 Years</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Property Price */}
-            <div className="mb-6">
-              <label className="block text-sm text-gray-500 mb-1">Property Price</label>
-              <div className="text-gray-700 text-sm mb-1">
-                ${price.toLocaleString()}
-              </div>
-              <input
-                type="range"
-                min="50000"
-                max="2000000"
-                step="10000"
-                value={price}
-                onChange={(e) => setPrice(Number(e.target.value))}
-                className="w-full accent-blue-600"
-              />
-            </div>
-
-            {/* Down Payment */}
-            <div className="mb-6">
-              <label className="block text-sm text-gray-500 mb-1">
-                Down Payment ({downPercent}%)
-              </label>
-              <div className="text-gray-700 text-sm mb-1">
-                ${((price * downPercent) / 100).toLocaleString()}
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="50"
-                step="1"
-                value={downPercent}
-                onChange={(e) => setDownPercent(Number(e.target.value))}
-                className="w-full accent-blue-600"
-              />
-            </div>
-
-            {/* Interest Rate */}
-            <div className="mb-4">
-              <label className="block text-sm text-gray-500 mb-1">
-                Interest Rate ({interestRate}%)
-              </label>
-              <input
-                type="range"
-                min="2"
-                max="10"
-                step="0.1"
-                value={interestRate}
-                onChange={(e) => setInterestRate(Number(e.target.value))}
-                className="w-full accent-blue-600"
-              />
-            </div>
-
-            {/* ADVANCED */}
-            <button
-              onClick={() => setShowAdvanced(!showAdvanced)}
-              className="flex items-center gap-2 border rounded-md px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-100 mb-4"
-            >
-              <Plus size={14} />
-              Advanced
+            <p className="text-sm text-gray-500 text-center mb-4">
+              {calc.description}
+            </p>
+            <button className="mt-auto bg-[#ED7A1C] hover:bg-[#ED7A1C] text-white text-sm font-medium py-2 px-6 rounded-full shadow-sm transition">
+              Open
             </button>
-
-            {showAdvanced && (
-              <div className="bg-gray-100 rounded-xl p-5 mb-6 shadow-sm">
-                <div className="flex justify-between items-center mb-3">
-                  <h3 className="font-semibold text-gray-600">Advanced Details</h3>
-                  <button
-                    className="text-sm text-gray-500 flex items-center gap-1"
-                    onClick={() => setShowAdvanced(false)}
-                  >
-                    hide <ChevronRight size={14} />
-                  </button>
-                </div>
-
-                {/* Annual Insurance */}
-                <div className="mb-4">
-                  <label className="block text-sm text-gray-500 mb-1">
-                    Annual Insurance
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="number"
-                      value={annualInsurance}
-                      onChange={(e) => setAnnualInsurance(Number(e.target.value))}
-                      className="w-1/2 border rounded-lg p-2"
-                    />
-                    <input
-                      type="number"
-                      value={((annualInsurance / price) * 100).toFixed(2)}
-                      readOnly
-                      className="w-1/2 border rounded-lg p-2 text-right text-gray-500 bg-gray-50"
-                    />
-                  </div>
-                </div>
-
-                {/* Annual Taxes */}
-                <div className="mb-4">
-                  <label className="block text-sm text-gray-500 mb-1">
-                    Annual Taxes
-                  </label>
-                  <div className="flex gap-2">
-                    <input
-                      type="number"
-                      value={annualTaxes}
-                      onChange={(e) => setAnnualTaxes(Number(e.target.value))}
-                      className="w-1/2 border rounded-lg p-2"
-                    />
-                    <input
-                      type="number"
-                      value={((annualTaxes / price) * 100).toFixed(2)}
-                      readOnly
-                      className="w-1/2 border rounded-lg p-2 text-right text-gray-500 bg-gray-50"
-                    />
-                  </div>
-                </div>
-
-                {/* Monthly HOA */}
-                <div>
-                  <label className="block text-sm text-gray-500 mb-1">
-                    Monthly HOA
-                  </label>
-                  <input
-                    type="number"
-                    value={monthlyHOA}
-                    onChange={(e) => setMonthlyHOA(Number(e.target.value))}
-                    className="w-full border rounded-lg p-2"
-                  />
-                </div>
-              </div>
-            )}
           </div>
-
-          {/* RIGHT: Chart */}
-          <div>
-            <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-              Monthly Payments Breakdown
-            </h2>
-
-            <div className="bg-gray-50 rounded-xl p-4 flex flex-col items-center">
-              <ResponsiveContainer width="100%" height={260}>
-                <PieChart>
-                  <Pie
-                    data={data}
-                    dataKey="value"
-                    innerRadius={70}
-                    outerRadius={110}
-                    paddingAngle={3}
-                    stroke="none"
-                  >
-                    {data.map((entry, index) => (
-                      <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip formatter={(v) => `$${v.toFixed(2)}`} />
-                </PieChart>
-              </ResponsiveContainer>
-
-              <p className="text-center mt-[-150px] text-3xl font-bold text-gray-800">
-                ${monthlyPayment.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-              </p>
-              <p className="text-sm text-gray-500 mb-4">Your Payment</p>
-
-              <div className="grid grid-cols-2 gap-y-2 text-sm text-gray-700 w-full mt-6 pt-16">
-                <div className="flex items-center gap-2">
-                  <span className="w-4 h-2 rounded-full bg-[#26B5F7]" />
-                  Principal & Interest: ${pAndI.toFixed(2)}
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-4 h-2 rounded-full bg-[#F8C630]" />
-                  Taxes & HOA: ${(annualTaxes / 12 + monthlyHOA).toFixed(2)}
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-4 h-2 rounded-full bg-[#2BC79C]" />
-                  Hazard Insurance: ${(annualInsurance / 12).toFixed(2)}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

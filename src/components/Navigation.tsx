@@ -1,21 +1,27 @@
-import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import logo from "../images/logo.png";
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Dropdown states
   const [learningCenterOpen, setLearningCenterOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
 
-  const learningRef = useRef<HTMLDivElement>(null);
-  const aboutRef = useRef<HTMLDivElement>(null);
+  // Mobile dropdowns
+  const [mobileLearningOpen, setMobileLearningOpen] = useState(false);
+  const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
 
-  // Close dropdowns when clicking outside
+  const learningRef = useRef(null);
+  const aboutRef = useRef(null);
+
+  // ✅ Close dropdowns when clicking outside
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (learningRef.current && !learningRef.current.contains(e.target as Node))
+    const handleClickOutside = (e) => {
+      if (learningRef.current && !learningRef.current.contains(e.target))
         setLearningCenterOpen(false);
-      if (aboutRef.current && !aboutRef.current.contains(e.target as Node))
+      if (aboutRef.current && !aboutRef.current.contains(e.target))
         setAboutOpen(false);
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -25,10 +31,9 @@ export default function Navigation() {
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
         {/* Header */}
         <div className="flex items-center justify-between h-20">
-          {/* ✅ Clickable Logo */}
+          {/* ✅ Logo */}
           <a href="/" className="flex items-center">
             <img
               src={logo}
@@ -39,47 +44,78 @@ export default function Navigation() {
 
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center space-x-8">
-            <a href="/buy-home" className="text-gray-700 hover:text-[#ED7A1C] font-medium">Buy a Home</a>
-            <a href="/calculator" className="text-gray-700 hover:text-[#ED7A1C] font-medium">Mortgage Calculator</a>
+            <a href="/buy-home" className="text-gray-700 hover:text-[#ED7A1C] font-medium">
+              Buy a Home
+            </a>
 
-            {/* Learning Center Dropdown */}
+            {/* 🔸 Single Calculators Link */}
+            <a href="/calculator" className="text-gray-700 hover:text-[#ED7A1C] font-medium">
+              Calculators
+            </a>
+
+            {/* 🔸 Learning Center Dropdown */}
             <div className="relative" ref={learningRef}>
               <button
                 onClick={() => setLearningCenterOpen(!learningCenterOpen)}
                 className="flex items-center space-x-1 text-gray-700 hover:text-[#ED7A1C] font-medium"
               >
                 <span>Learning Center</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${learningCenterOpen ? "rotate-180" : ""}`} />
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    learningCenterOpen ? "rotate-180" : ""
+                  }`}
+                />
               </button>
               {learningCenterOpen && (
-                <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-md py-2 animate-fadeIn">
-                  <a href="/learning/loan-programs" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">Loan Programs</a>
-                  <a href="/learning/loan-process" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">Loan Process</a>
-                  <a href="/learning/mortgage-basics" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">Mortgage Basics</a>
-                  <a href="/learning/faq" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">FAQ</a>
+                <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-md py-2 border z-50 transition-all duration-300">
+                  <a href="/learning/loan-programs" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                    Loan Programs
+                  </a>
+                  <a href="/learning/loan-process" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                    Loan Process
+                  </a>
+                  <a href="/learning/mortgage-basics" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                    Mortgage Basics
+                  </a>
+                  <a href="/learning/faq" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                    FAQ
+                  </a>
                 </div>
               )}
             </div>
 
-            {/* About Dropdown */}
+            {/* 🔸 About Dropdown */}
             <div className="relative" ref={aboutRef}>
               <button
                 onClick={() => setAboutOpen(!aboutOpen)}
                 className="flex items-center space-x-1 text-gray-700 hover:text-[#ED7A1C] font-medium"
               >
                 <span>About</span>
-                <ChevronDown className={`w-4 h-4 transition-transform ${aboutOpen ? "rotate-180" : ""}`} />
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    aboutOpen ? "rotate-180" : ""
+                  }`}
+                />
               </button>
               {aboutOpen && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 animate-fadeIn">
-                  <a href="/about" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">About</a>
-                  <a href="/testimonials" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">Testimonials</a>
-                  <a href="/contact" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">Contact</a>
-                  <a href="/reviews" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">Reviews</a>
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 border z-50 transition-all duration-300">
+                  <a href="/about" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                    About
+                  </a>
+                  <a href="/testimonials" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                    Testimonials
+                  </a>
+                  <a href="/contact" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                    Contact
+                  </a>
+                  <a href="/reviews" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                    Reviews
+                  </a>
                 </div>
               )}
             </div>
 
+            {/* Apply Now */}
             <a
               href="/apply"
               className="bg-[#ED7A1C] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#D66A0C] transition"
@@ -97,22 +133,22 @@ export default function Navigation() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* 🔸 Mobile Menu */}
         {menuOpen && (
-          <div className="lg:hidden bg-white shadow-md border-t border-gray-200 animate-slideDown">
+          <div className="lg:hidden bg-white shadow-md border-t border-gray-200">
             <div className="flex flex-col items-start px-6 py-4 space-y-3 text-gray-700">
-              <a href="/" className="hover:text-[#ED7A1C]">Buy a Home</a>
-              <a href="/calculator" className="hover:text-[#ED7A1C]">Mortgage Calculator</a>
+              <a href="/buy-home" className="hover:text-[#ED7A1C]">Buy a Home</a>
+              <a href="/calculator" className="hover:text-[#ED7A1C]">Calculators</a>
 
-              {/* Learning Center (Mobile) */}
+              {/* Mobile Learning */}
               <div>
                 <button
-                  onClick={() => setLearningCenterOpen(!learningCenterOpen)}
+                  onClick={() => setMobileLearningOpen(!mobileLearningOpen)}
                   className="flex items-center justify-between w-full hover:text-[#ED7A1C]"
                 >
-                  Learning Center <ChevronDown className="w-4 h-4" />
+                  Learning Center <ChevronDown className={`w-4 h-4 ${mobileLearningOpen ? "rotate-180" : ""}`} />
                 </button>
-                {learningCenterOpen && (
+                {mobileLearningOpen && (
                   <div className="pl-4 mt-2 space-y-2 text-sm">
                     <a href="/learning/loan-programs" className="block hover:text-[#ED7A1C]">Loan Programs</a>
                     <a href="/learning/loan-process" className="block hover:text-[#ED7A1C]">Loan Process</a>
@@ -122,15 +158,15 @@ export default function Navigation() {
                 )}
               </div>
 
-              {/* About (Mobile) */}
+              {/* Mobile About */}
               <div>
                 <button
-                  onClick={() => setAboutOpen(!aboutOpen)}
+                  onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
                   className="flex items-center justify-between w-full hover:text-[#ED7A1C]"
                 >
-                  About <ChevronDown className="w-4 h-4" />
+                  About <ChevronDown className={`w-4 h-4 ${mobileAboutOpen ? "rotate-180" : ""}`} />
                 </button>
-                {aboutOpen && (
+                {mobileAboutOpen && (
                   <div className="pl-4 mt-2 space-y-2 text-sm">
                     <a href="/about" className="block hover:text-[#ED7A1C]">About</a>
                     <a href="/testimonials" className="block hover:text-[#ED7A1C]">Testimonials</a>
