@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // ✅ Import all main pages
 import Home from "../pages/Home";
 import BuyHome from "../pages/BuyHome";
-import Calculator from "../pages/Calculator"; // ✅ Capitalized to match file
+import Calculator from "../pages/calculator"; // ✅ Capitalized to match file
 import LoanPrograms from "../pages/LoanPrograms";
 import LoanProcess from "../pages/LoanProcess";
 import MortgageBasics from "../pages/MortgageBasics";
@@ -14,7 +14,7 @@ import Contact from "../pages/Contact";
 import Reviews from "../pages/Reviews";
 import Apply from "../pages/Apply";
 import Purchase from "../pages/purchase";
-import Refinance from "../pages/refinance"; // ✅ fixed spelling (was refinane)
+import Refinance from "../pages/refinance"; 
 
 // ✅ Import all calculators (ensure file names match exactly)
 import MortgageCalculator from "../pages/calculators/mortgagecalculator";
