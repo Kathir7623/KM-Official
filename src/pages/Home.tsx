@@ -14,7 +14,7 @@ export default function Home() {
               src={heroImg}
               alt="Mortgage Illustration"
               className="
-                w-[95%]
+                w-[100%]
                 sm:w-[90%] 
                 md:w-full 
                 max-w-xl 

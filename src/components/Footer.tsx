@@ -80,7 +80,7 @@ export default function Footer() {
                   href="tel:+14707065858"
                   className="hover:text-gray-300 transition"
                 >
-                  (470) 706-5858
+                  (470)706-5858
                 </a>
               </li>
 
