@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // ✅ Import all main pages
 import Home from "../pages/Home";
 import BuyHome from "../pages/BuyHome";
-import Calculator from "../pages/calculator"; // main calculator grid page
+import Calculator from "../pages/Calculator"; // ✅ Capitalized to match file
 import LoanPrograms from "../pages/LoanPrograms";
 import LoanProcess from "../pages/LoanProcess";
 import MortgageBasics from "../pages/MortgageBasics";
@@ -14,20 +14,20 @@ import Contact from "../pages/Contact";
 import Reviews from "../pages/Reviews";
 import Apply from "../pages/Apply";
 import Purchase from "../pages/purchase";
-import Refinance from "../pages/refinane"; // ✅ corrected spelling
+import Refinance from "../pages/refinance"; // ✅ fixed spelling (was refinane)
 
-// ✅ Import all calculators
+// ✅ Import all calculators (ensure file names match exactly)
 import MortgageCalculator from "../pages/calculators/mortgagecalculator";
 import RefinanceCalculator from "../pages/calculators/refinancecalculator";
 import ExtraPaymentCalculator from "../pages/calculators/extrapaymentcalculator";
 import AffordabilityCalculator from "../pages/calculators/affordabilitycalculator";
 import PrincipalCalculator from "../pages/calculators/principalcalculator";
-import TaxBenefitCalculator from "../pages/calculators/TaxBenefitCalculator";
-import APRCalculator from "../pages/calculators/APRCalculator";
-import InterestOnlyCalculator from "../pages/calculators/IntrestonlyCalculator";
-import ShouldIPayPointsCalculator from "../pages/calculators/Shoulipaypointscalculator";
+import TaxBenefitCalculator from "../pages/calculators/taxbenefitcalculator";
+import APRCalculator from "../pages/calculators/aprcalculator";
+import InterestOnlyCalculator from "../pages/calculators/interestonlycalculator";
+import ShouldIPayPointsCalculator from "../pages/calculators/shouldipaypointscalculator";
 import IncomeToQualifyCalculator from "../pages/calculators/incometoqualify";
-import BuydownCalculator from "../pages/calculators/BuydownCalculator";
+import BuydownCalculator from "../pages/calculators/buydowncalculator";
 
 export default function Router() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -43,7 +43,7 @@ export default function Router() {
     const originalPushState = window.history.pushState;
     const originalReplaceState = window.history.replaceState;
 
-    // ✅ Listen to manual route changes
+    // ✅ Watch history changes
     window.history.pushState = function (...args) {
       originalPushState.apply(window.history, args as any);
       handleLocationChange();
@@ -54,7 +54,7 @@ export default function Router() {
       handleLocationChange();
     };
 
-    // ✅ Handle internal anchor clicks
+    // ✅ Handle in-app navigation
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest("a");
@@ -76,13 +76,13 @@ export default function Router() {
     };
   }, []);
 
-  // ✅ All routes including every calculator
+  // ✅ Route map
   const routes: { [key: string]: JSX.Element } = {
     "/": <Home />,
     "/buy-home": <BuyHome />,
     "/calculator": <Calculator />,
 
-    // ✅ Calculator routes
+    // ✅ Calculators
     "/calculator/mortgage": <MortgageCalculator />,
     "/calculator/refinance": <RefinanceCalculator />,
     "/calculator/extrapaymentcalculator": <ExtraPaymentCalculator />,
