@@ -4,25 +4,26 @@ import logo from "../images/logo.png";
 
 export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  // Dropdown states
   const [learningCenterOpen, setLearningCenterOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
-
-  // Mobile dropdowns
   const [mobileLearningOpen, setMobileLearningOpen] = useState(false);
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false);
 
-  const learningRef = useRef(null);
-  const aboutRef = useRef(null);
+  const learningRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
 
   // ✅ Close dropdowns when clicking outside
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (learningRef.current && !learningRef.current.contains(e.target))
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        learningRef.current &&
+        !learningRef.current.contains(e.target as Node)
+      ) {
         setLearningCenterOpen(false);
-      if (aboutRef.current && !aboutRef.current.contains(e.target))
+      }
+      if (aboutRef.current && !aboutRef.current.contains(e.target as Node)) {
         setAboutOpen(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -44,19 +45,26 @@ export default function Navigation() {
 
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center space-x-8">
-            <a href="/buy-home" className="text-gray-700 hover:text-[#ED7A1C] font-medium">
+            <a
+              href="/buy-home"
+              className="text-gray-700 hover:text-[#ED7A1C] font-medium"
+            >
               Buy a Home
             </a>
 
-            {/* 🔸 Single Calculators Link */}
-            <a href="/calculator" className="text-gray-700 hover:text-[#ED7A1C] font-medium">
+            <a
+              href="/calculator"
+              className="text-gray-700 hover:text-[#ED7A1C] font-medium"
+            >
               Calculators
             </a>
 
-            {/* 🔸 Learning Center Dropdown */}
+            {/* Learning Center Dropdown */}
             <div className="relative" ref={learningRef}>
               <button
-                onClick={() => setLearningCenterOpen(!learningCenterOpen)}
+                onClick={() =>
+                  setLearningCenterOpen((prev) => !prev)
+                }
                 className="flex items-center space-x-1 text-gray-700 hover:text-[#ED7A1C] font-medium"
               >
                 <span>Learning Center</span>
@@ -66,28 +74,41 @@ export default function Navigation() {
                   }`}
                 />
               </button>
+
               {learningCenterOpen && (
-                <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-md py-2 border z-50 transition-all duration-300">
-                  <a href="/learning/loan-programs" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                <div className="absolute top-full left-0 mt-2 w-56 bg-white shadow-lg rounded-md py-2 border z-50">
+                  <a
+                    href="/learning/loan-programs"
+                    className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]"
+                  >
                     Loan Programs
                   </a>
-                  <a href="/learning/loan-process" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                  <a
+                    href="/learning/loan-process"
+                    className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]"
+                  >
                     Loan Process
                   </a>
-                  <a href="/learning/mortgage-basics" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                  <a
+                    href="/learning/mortgage-basics"
+                    className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]"
+                  >
                     Mortgage Basics
                   </a>
-                  <a href="/learning/faq" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                  <a
+                    href="/learning/faq"
+                    className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]"
+                  >
                     FAQ
                   </a>
                 </div>
               )}
             </div>
 
-            {/* 🔸 About Dropdown */}
+            {/* About Dropdown */}
             <div className="relative" ref={aboutRef}>
               <button
-                onClick={() => setAboutOpen(!aboutOpen)}
+                onClick={() => setAboutOpen((prev) => !prev)}
                 className="flex items-center space-x-1 text-gray-700 hover:text-[#ED7A1C] font-medium"
               >
                 <span>About</span>
@@ -97,25 +118,38 @@ export default function Navigation() {
                   }`}
                 />
               </button>
+
               {aboutOpen && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 border z-50 transition-all duration-300">
-                  <a href="/about" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-md py-2 border z-50">
+                  <a
+                    href="/about"
+                    className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]"
+                  >
                     About
                   </a>
-                  <a href="/testimonials" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                  <a
+                    href="/testimonials"
+                    className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]"
+                  >
                     Testimonials
                   </a>
-                  <a href="/contact" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                  <a
+                    href="/contact"
+                    className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]"
+                  >
                     Contact
                   </a>
-                  <a href="/reviews" className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]">
+                  <a
+                    href="/reviews"
+                    className="block px-4 py-2 hover:text-[#ED7A1C] hover:bg-[#FFF5E6]"
+                  >
                     Reviews
                   </a>
                 </div>
               )}
             </div>
 
-            {/* Apply Now */}
+            {/* Apply Now Button */}
             <a
               href="/apply"
               className="bg-[#ED7A1C] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#D66A0C] transition"
@@ -124,54 +158,103 @@ export default function Navigation() {
             </a>
           </div>
 
-          {/* Mobile Menu Icon */}
+          {/* Mobile Menu Button */}
           <button
             className="lg:hidden p-2 text-gray-700 hover:text-[#ED7A1C] transition"
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setMenuOpen((prev) => !prev)}
           >
             {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
 
-        {/* 🔸 Mobile Menu */}
+        {/* Mobile Menu */}
         {menuOpen && (
           <div className="lg:hidden bg-white shadow-md border-t border-gray-200">
             <div className="flex flex-col items-start px-6 py-4 space-y-3 text-gray-700">
-              <a href="/buy-home" className="hover:text-[#ED7A1C]">Buy a Home</a>
-              <a href="/calculator" className="hover:text-[#ED7A1C]">Calculators</a>
+              <a href="/buy-home" className="hover:text-[#ED7A1C]">
+                Buy a Home
+              </a>
+              <a href="/calculator" className="hover:text-[#ED7A1C]">
+                Calculators
+              </a>
 
-              {/* Mobile Learning */}
-              <div>
+              {/* Mobile Learning Dropdown */}
+              <div className="w-full">
                 <button
-                  onClick={() => setMobileLearningOpen(!mobileLearningOpen)}
+                  onClick={() =>
+                    setMobileLearningOpen((prev) => !prev)
+                  }
                   className="flex items-center justify-between w-full hover:text-[#ED7A1C]"
                 >
-                  Learning Center <ChevronDown className={`w-4 h-4 ${mobileLearningOpen ? "rotate-180" : ""}`} />
+                  Learning Center
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      mobileLearningOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
                 {mobileLearningOpen && (
                   <div className="pl-4 mt-2 space-y-2 text-sm">
-                    <a href="/learning/loan-programs" className="block hover:text-[#ED7A1C]">Loan Programs</a>
-                    <a href="/learning/loan-process" className="block hover:text-[#ED7A1C]">Loan Process</a>
-                    <a href="/learning/mortgage-basics" className="block hover:text-[#ED7A1C]">Mortgage Basics</a>
-                    <a href="/learning/faq" className="block hover:text-[#ED7A1C]">FAQ</a>
+                    <a
+                      href="/learning/loan-programs"
+                      className="block hover:text-[#ED7A1C]"
+                    >
+                      Loan Programs
+                    </a>
+                    <a
+                      href="/learning/loan-process"
+                      className="block hover:text-[#ED7A1C]"
+                    >
+                      Loan Process
+                    </a>
+                    <a
+                      href="/learning/mortgage-basics"
+                      className="block hover:text-[#ED7A1C]"
+                    >
+                      Mortgage Basics
+                    </a>
+                    <a
+                      href="/learning/faq"
+                      className="block hover:text-[#ED7A1C]"
+                    >
+                      FAQ
+                    </a>
                   </div>
                 )}
               </div>
 
-              {/* Mobile About */}
-              <div>
+              {/* Mobile About Dropdown */}
+              <div className="w-full">
                 <button
-                  onClick={() => setMobileAboutOpen(!mobileAboutOpen)}
+                  onClick={() =>
+                    setMobileAboutOpen((prev) => !prev)
+                  }
                   className="flex items-center justify-between w-full hover:text-[#ED7A1C]"
                 >
-                  About <ChevronDown className={`w-4 h-4 ${mobileAboutOpen ? "rotate-180" : ""}`} />
+                  About
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${
+                      mobileAboutOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
                 {mobileAboutOpen && (
                   <div className="pl-4 mt-2 space-y-2 text-sm">
-                    <a href="/about" className="block hover:text-[#ED7A1C]">About</a>
-                    <a href="/testimonials" className="block hover:text-[#ED7A1C]">Testimonials</a>
-                    <a href="/contact" className="block hover:text-[#ED7A1C]">Contact</a>
-                    <a href="/reviews" className="block hover:text-[#ED7A1C]">Reviews</a>
+                    <a href="/about" className="block hover:text-[#ED7A1C]">
+                      About
+                    </a>
+                    <a
+                      href="/testimonials"
+                      className="block hover:text-[#ED7A1C]"
+                    >
+                      Testimonials
+                    </a>
+                    <a href="/contact" className="block hover:text-[#ED7A1C]">
+                      Contact
+                    </a>
+                    <a href="/reviews" className="block hover:text-[#ED7A1C]">
+                      Reviews
+                    </a>
                   </div>
                 )}
               </div>
