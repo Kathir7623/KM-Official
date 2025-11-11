@@ -22,12 +22,12 @@ import RefinanceCalculator from "../pages/calculators/refinancecalculator";
 import ExtraPaymentCalculator from "../pages/calculators/extrapaymentcalculator";
 import AffordabilityCalculator from "../pages/calculators/affordabilitycalculator";
 import PrincipalCalculator from "../pages/calculators/principalcalculator";
-import TaxBenefitCalculator from "../pages/calculators/taxbenefitcalculator";
-import APRCalculator from "../pages/calculators/aprcalculator";
-import InterestOnlyCalculator from "../pages/calculators/interestonlycalculator";
-import ShouldIPayPointsCalculator from "../pages/calculators/shouldipaypointscalculator";
+import TaxBenefitCalculator from "../pages/calculators/TaxBenefitCalculator";
+import APRCalculator from "../pages/calculators/APRCalculator";
+import InterestOnlyCalculator from "../pages/calculators/IntrestonlyCalculator";
+import ShouldIPayPointsCalculator from "../pages/calculators/Shoulipaypointscalculator";
 import IncomeToQualifyCalculator from "../pages/calculators/incometoqualify";
-import BuydownCalculator from "../pages/calculators/buydowncalculator";
+import BuydownCalculator from "../pages/calculators/BuydownCalculator";
 
 export default function Router() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
