@@ -101,13 +101,13 @@ interface FlowSummaryProps {
     step: number;
 }
 
-// const FlowSummary = ({ loanType, step }: FlowSummaryProps) => {
-//     if (step === 0 || !loanType) return null;
+const FlowSummary = ({ loanType, step }: FlowSummaryProps) => {
+    if (step === 0 || !loanType) return null;
 
-//     const flowTitleMap: Record<string, string> = {
-//         purchase: "Purchase Loan Application",
-//         refinance: "Refinance Loan Application",
-//     };
+    const flowTitleMap: Record<string, string> = {
+        purchase: "Purchase Loan Application",
+        refinance: "Refinance Loan Application",
+    };
 
 //     // Calculate progress: steps 1-12 for purchase, 1-18 for others.
 //     const totalSteps = loanType === 'purchase' ? 12 : 18;
@@ -134,7 +134,7 @@ interface FlowSummaryProps {
 //             <p className="text-right text-xs text-gray-500 mt-1">{progressPercent}% Complete</p>
 //         </div>
 //     );
-// }
+}
 
 // --- Main Flow Component (Updated step 0 rendering) ---
 export default function MortgageFlow() {
@@ -255,7 +255,7 @@ export default function MortgageFlow() {
   const renderYesNoButtons = (state: string | null, setter: (value: string) => void) => {
     const autoAdvanceSetter = createAutoAdvanceSetter(setter);
     return (
-      <div className="flex justify-center gap-10">
+      <div className="flex flex-col md:flex-row justify-center gap-10 ">
         {yesNoOptions.map((opt) => (
           <CircularSelectionButton
             key={opt.id}
