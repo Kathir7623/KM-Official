@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 // Main pages
 import Home from "../pages/Home";
 import BuyHome from "../pages/BuyHome";
-import Calculator from "../pages/Calculator";
 import LoanPrograms from "../pages/LoanPrograms";
 import LoanProcess from "../pages/LoanProcess";
 import MortgageBasics from "../pages/MortgageBasics";
@@ -24,7 +23,7 @@ import Refinancebasics from "../pages/Refinancebasics";
 import Glossary from "../pages/Glossary";
 import Foreclosure from "../pages/Foreclosure";
 
-// Calculators (must match EXACT names in folder)
+// Calculators (ensure exact casing of file names)
 import MortgageCalculator from "../pages/calculators/mortgagecalculator";
 import RefinanceCalculator from "../pages/calculators/refinancecalculator";
 import ExtraPaymentCalculator from "../pages/calculators/extrapaymentcalculator";
@@ -36,6 +35,9 @@ import InterestOnlyCalculator from "../pages/calculators/IntrestonlyCalculator";
 import ShouldIPayPointsCalculator from "../pages/calculators/Shoulipaypointscalculator";
 import IncomeToQualifyCalculator from "../pages/calculators/incometoqualify";
 import BuydownCalculator from "../pages/calculators/BuydownCalculator";
+
+// Optional: generic calculator landing page
+import Calculator from "../pages/Calculator";
 
 export default function Router() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -64,7 +66,6 @@ export default function Router() {
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest("a");
-
       if (anchor && anchor.href.startsWith(window.location.origin)) {
         const url = new URL(anchor.href);
         if (url.pathname !== window.location.pathname) {
@@ -83,6 +84,7 @@ export default function Router() {
   }, []);
 
   const routes: { [key: string]: JSX.Element } = {
+    // Main pages
     "/": <Home />,
     "/buy-home": <BuyHome />,
     "/calculator": <Calculator />,
@@ -110,13 +112,13 @@ export default function Router() {
     "/glossary": <Glossary />,
     "/foreclosure": <Foreclosure />,
 
-    // Learning
+    // Learning pages
     "/learning/loan-programs": <LoanPrograms />,
     "/learning/loan-process": <LoanProcess />,
     "/learning/mortgage-basics": <MortgageBasics />,
     "/learning/faq": <FAQ />,
 
-    // More pages
+    // Other pages
     "/about": <About />,
     "/testimonials": <Testimonials />,
     "/contact": <Contact />,
