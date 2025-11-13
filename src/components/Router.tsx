@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-// ✅ Import all main pages
+// Main pages
 import Home from "../pages/Home";
 import BuyHome from "../pages/BuyHome";
 import Calculator from "../pages/calculator";
@@ -24,7 +24,7 @@ import Refinancebasics from "../pages/Refinancebasics";
 import Glossary from "../pages/Glossary";
 import Foreclosure from "../pages/Foreclosure";
 
-// ✅ Import all calculators (ensure file names match exactly)
+// Calculators (must match EXACT names in folder)
 import MortgageCalculator from "../pages/calculators/mortgagecalculator";
 import RefinanceCalculator from "../pages/calculators/refinancecalculator";
 import ExtraPaymentCalculator from "../pages/calculators/extrapaymentcalculator";
@@ -51,7 +51,6 @@ export default function Router() {
     const originalPushState = window.history.pushState;
     const originalReplaceState = window.history.replaceState;
 
-    // ✅ Override history methods to handle navigation
     window.history.pushState = function (...args) {
       originalPushState.apply(window.history, args as any);
       handleLocationChange();
@@ -62,7 +61,6 @@ export default function Router() {
       handleLocationChange();
     };
 
-    // ✅ Intercept internal anchor clicks
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest("a");
@@ -84,13 +82,12 @@ export default function Router() {
     };
   }, []);
 
-  // ✅ Route map
   const routes: { [key: string]: JSX.Element } = {
     "/": <Home />,
     "/buy-home": <BuyHome />,
     "/calculator": <Calculator />,
 
-    // ✅ Calculators
+    // Calculators
     "/calculator/mortgage": <MortgageCalculator />,
     "/calculator/refinance": <RefinanceCalculator />,
     "/calculator/extrapaymentcalculator": <ExtraPaymentCalculator />,
@@ -103,7 +100,7 @@ export default function Router() {
     "/calculator/incometoqualify": <IncomeToQualifyCalculator />,
     "/calculator/buydowncalculator": <BuydownCalculator />,
 
-    // ✅ Application and credit pages
+    // Application & credit pages
     "/application-checklist": <ApplicationChecklist />,
     "/credit": <Credit />,
     "/closingcost": <Closingcost />,
@@ -113,13 +110,13 @@ export default function Router() {
     "/glossary": <Glossary />,
     "/foreclosure": <Foreclosure />,
 
-    // ✅ Learning section
+    // Learning
     "/learning/loan-programs": <LoanPrograms />,
     "/learning/loan-process": <LoanProcess />,
     "/learning/mortgage-basics": <MortgageBasics />,
     "/learning/faq": <FAQ />,
 
-    // ✅ General pages
+    // More pages
     "/about": <About />,
     "/testimonials": <Testimonials />,
     "/contact": <Contact />,
