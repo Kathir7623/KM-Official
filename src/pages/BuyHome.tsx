@@ -104,10 +104,10 @@ interface FlowSummaryProps {
 const FlowSummary = ({ loanType, step }: FlowSummaryProps) => {
     if (step === 0 || !loanType) return null;
 
-    const flowTitleMap: Record<string, string> = {
-        purchase: "Purchase Loan Application",
-        refinance: "Refinance Loan Application",
-    };
+//     const flowTitleMap: Record<string, string> = {
+//         purchase: "Purchase Loan Application",
+//         refinance: "Refinance Loan Application",
+//     };
 
 //     // Calculate progress: steps 1-12 for purchase, 1-18 for others.
 //     const totalSteps = loanType === 'purchase' ? 12 : 18;
