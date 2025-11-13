@@ -78,7 +78,7 @@ const CircularSelectionButton = ({ id, label, icon, selected, onClick, size = 's
         <div
             key={id}
             onClick={onClick}
-            className={`cursor-pointer flex flex-col items-center p-4 rounded-full justify-center shadow-md transition ${circleClasses} ${
+            className={`cursor-pointer flex flex-col items-center p-4 rounded-full justify-center shadow-md w-48 h-48 transition ${circleClasses} ${
                 selected
                   ? "border-[#ED7A1C] bg-orange-50"
                   : "border-gray-200 hover:border-[#ED7A1C]"
