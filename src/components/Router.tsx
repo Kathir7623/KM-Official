@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // Main pages
 import Home from "../pages/Home";
 import BuyHome from "../pages/BuyHome";
-import Calculator from "../pages/calculator";
+import Calculator from "../pages/calculator.tsx";
 import LoanPrograms from "../pages/LoanPrograms";
 import LoanProcess from "../pages/LoanProcess";
 import MortgageBasics from "../pages/MortgageBasics";
