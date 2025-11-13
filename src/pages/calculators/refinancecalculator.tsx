@@ -190,7 +190,9 @@ export default function RefinanceCalculator() {
                       <Cell key={index} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip formatter={(v) => `$${v.toFixed(2)}`} />
+                  <Tooltip
+                    formatter={(value) => `$${Number(value || 0).toFixed(2)}`}
+                  />
                 </PieChart>
               </ResponsiveContainer>
 

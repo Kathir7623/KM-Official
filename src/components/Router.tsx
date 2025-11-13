@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // ✅ Import all main pages
 import Home from "../pages/Home";
 import BuyHome from "../pages/BuyHome";
-import Calculator from "../pages/calculator"; 
+import Calculator from "../pages/calculator";
 import LoanPrograms from "../pages/LoanPrograms";
 import LoanProcess from "../pages/LoanProcess";
 import MortgageBasics from "../pages/MortgageBasics";
@@ -14,7 +14,15 @@ import Contact from "../pages/Contact";
 import Reviews from "../pages/Reviews";
 import Apply from "../pages/Apply";
 import Purchase from "../pages/purchase";
-import Refinance from "../pages/refinance"; 
+import Refinance from "../pages/refinance";
+import ApplicationChecklist from "../pages/ApplicationChecklist";
+import Credit from "../pages/Credit";
+import Closingcost from "../pages/Closingcost";
+import Appraisal from "../pages/Appraisal";
+import PMI from "../pages/PMI";
+import Refinancebasics from "../pages/Refinancebasics";
+import Glossary from "../pages/Glossary";
+import Foreclosure from "../pages/Foreclosure";
 
 // ✅ Import all calculators (ensure file names match exactly)
 import MortgageCalculator from "../pages/calculators/mortgagecalculator";
@@ -43,7 +51,7 @@ export default function Router() {
     const originalPushState = window.history.pushState;
     const originalReplaceState = window.history.replaceState;
 
-    // ✅ Watch history changes
+    // ✅ Override history methods to handle navigation
     window.history.pushState = function (...args) {
       originalPushState.apply(window.history, args as any);
       handleLocationChange();
@@ -54,7 +62,7 @@ export default function Router() {
       handleLocationChange();
     };
 
-    // ✅ Handle in-app navigation
+    // ✅ Intercept internal anchor clicks
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const anchor = target.closest("a");
@@ -94,6 +102,16 @@ export default function Router() {
     "/calculator/shouldipaypointscalculator": <ShouldIPayPointsCalculator />,
     "/calculator/incometoqualify": <IncomeToQualifyCalculator />,
     "/calculator/buydowncalculator": <BuydownCalculator />,
+
+    // ✅ Application and credit pages
+    "/application-checklist": <ApplicationChecklist />,
+    "/credit": <Credit />,
+    "/closingcost": <Closingcost />,
+    "/appraisal": <Appraisal />,
+    "/pmi": <PMI />,
+    "/refinancebasics": <Refinancebasics />,
+    "/glossary": <Glossary />,
+    "/foreclosure": <Foreclosure />,
 
     // ✅ Learning section
     "/learning/loan-programs": <LoanPrograms />,

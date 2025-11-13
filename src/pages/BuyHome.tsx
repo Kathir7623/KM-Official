@@ -47,14 +47,14 @@ const generateInterestRates = () => {
 const interestRates = generateInterestRates();
 
 
-// --- CIRCULAR BUTTON COMPONENT (Unchanged) ---
+// --- CIRCULAR BUTTON COMPONENT (UPDATED for 'lg' size) ---
 interface CircularButtonProps {
     id: string;
     label: string;
     icon: ReactNode;
     selected: boolean;
     onClick: () => void;
-    size?: 'sm' | 'md' | 'lg';
+    size?: 'sm' | 'md' | 'lg'; // 'lg' added
 }
 
 const CircularSelectionButton = ({ id, label, icon, selected, onClick, size = 'sm' }: CircularButtonProps) => {
@@ -66,7 +66,13 @@ const CircularSelectionButton = ({ id, label, icon, selected, onClick, size = 's
         circleClasses = "border-4 w-40 h-40 text-center";
         iconSize = "text-5xl";
         labelSize = "font-semibold";
+    } else if (size === 'lg') { // New 'lg' size for 14rem x 14rem (using a custom style)
+        // Tailwind classes do not easily support 14rem, so use inline style and larger classes
+        circleClasses = "border-4 text-center";
+        iconSize = "text-8xl"; // Increased icon size
+        labelSize = "text-xl font-bold mt-2"; // Increased label size
     }
+
 
     return (
         <div
@@ -77,7 +83,11 @@ const CircularSelectionButton = ({ id, label, icon, selected, onClick, size = 's
                   ? "border-[#ED7A1C] bg-orange-50"
                   : "border-gray-200 hover:border-[#ED7A1C]"
             } flex-shrink-0`} 
-            style={{ margin: '0 10px' }}
+            style={{ 
+                margin: '0 10px', 
+                width: size === 'lg' ? '12rem' : undefined, 
+                height: size === 'lg' ? '12rem' : undefined 
+            }}
         >
             <div className={`${iconSize} mb-1`}>{icon}</div>
             <p className={`text-gray-700 ${labelSize}`}>{label}</p>
@@ -85,49 +95,48 @@ const CircularSelectionButton = ({ id, label, icon, selected, onClick, size = 's
     );
 };
 
-// --- NEW FLOW SUMMARY COMPONENT ---
+// --- NEW FLOW SUMMARY COMPONENT (Unchanged) ---
 interface FlowSummaryProps {
-    loanType: string | null;
-    step: number;
+    loanType: string | null;
+    step: number;
 }
 
 const FlowSummary = ({ loanType, step }: FlowSummaryProps) => {
-    if (step === 0 || !loanType) return null;
+    if (step === 0 || !loanType) return null;
 
-    const flowTitleMap: Record<string, string> = {
-        purchase: "Purchase Loan Application",
-        refinance: "Refinance Loan Application",
-        homeEquity: "Home Equity Loan Application",
-    };
+    const flowTitleMap: Record<string, string> = {
+        purchase: "Purchase Loan Application",
+        refinance: "Refinance Loan Application",
+    };
 
-    // Calculate progress: steps 1-12 for purchase, 1-18 for others.
-    const totalSteps = loanType === 'purchase' ? 12 : 18;
-    const currentStepIndex = step <= totalSteps ? step : totalSteps; // Cap at totalSteps
-    const progressPercent = Math.round((currentStepIndex / totalSteps) * 100);
+    // Calculate progress: steps 1-12 for purchase, 1-18 for others.
+    const totalSteps = loanType === 'purchase' ? 12 : 18;
+    const currentStepIndex = step <= totalSteps ? step : totalSteps; // Cap at totalSteps
+    const progressPercent = Math.round((currentStepIndex / totalSteps) * 100);
 
-    return (
-        <div className="w-full max-w-4xl mx-auto mb-8 p-4 bg-white rounded-xl shadow-lg border border-gray-100">
-            <div className="flex justify-between items-center mb-3">
-                <h2 className="text-xl font-bold text-gray-800">
-                    {flowTitleMap[loanType] || 'Loan Application'}
-                </h2>
-                <span className="text-sm font-medium text-[#ED7A1C]">
-                    Step {currentStepIndex} of {totalSteps}
-                </span>
-            </div>
-            
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div 
-                    className="bg-[#ED7A1C] h-2.5 rounded-full transition-all duration-500 ease-out" 
-                    style={{ width: `${progressPercent}%` }}
-                ></div>
-            </div>
-            <p className="text-right text-xs text-gray-500 mt-1">{progressPercent}% Complete</p>
-        </div>
-    );
+    return (
+        <div className="w-full max-w-4xl mx-auto mb-8 p-4 bg-white rounded-xl shadow-lg border border-gray-100">
+            <div className="flex justify-between items-center mb-3">
+                <h2 className="text-xl font-bold text-gray-800">
+                    {flowTitleMap[loanType] || 'Loan Application'}
+                </h2>
+                <span className="text-sm font-medium text-[#ED7A1C]">
+                    Step {currentStepIndex} of {totalSteps}
+                </span>
+            </div>
+            
+            <div className="w-full bg-gray-200 rounded-full h-2.5">
+                <div 
+                    className="bg-[#ED7A1C] h-2.5 rounded-full transition-all duration-500 ease-out" 
+                    style={{ width: `${progressPercent}%` }}
+                ></div>
+            </div>
+            <p className="text-right text-xs text-gray-500 mt-1">{progressPercent}% Complete</p>
+        </div>
+    );
 }
 
-// --- Main Flow Component ---
+// --- Main Flow Component (Updated step 0 rendering) ---
 export default function MortgageFlow() {
   const [step, setStep] = useState(0);
   const [loanType, setLoanType] = useState<string | null>(null);
@@ -168,7 +177,7 @@ export default function MortgageFlow() {
   const loanOptions = [
     { id: "purchase", label: "Purchase", icon: "🔑" },
     { id: "refinance", label: "Refinance", icon: "🏠" },
-    { id: "homeEquity", label: "Home Equity", icon: "💵" },
+
   ];
 
   const yesNoOptions = [
@@ -178,8 +187,8 @@ export default function MortgageFlow() {
 
   // --- AUTO-ADVANCE HELPERS ---
   const advanceStep = () => {
-    const maxPurchaseStep = 13; // Final step (completion message)
-    const maxRefiStep = 20; // Final step (completion message after contact form at 19)
+    const maxPurchaseStep = 13; 
+    const maxRefiStep = 20;
 
     if (loanType === "purchase" && step < maxPurchaseStep) setStep(step + 1);
     else if ((loanType === "refinance" || loanType === "homeEquity") && step < maxRefiStep) setStep(step + 1);
@@ -187,10 +196,9 @@ export default function MortgageFlow() {
 
   const handleSetLoanType = (type: string) => {
     setLoanType(type);
-    setStep(1); // Always moves to step 1
+    setStep(1); 
   };
   
-  // Custom setter for selection fields that also advances the step
   const createAutoAdvanceSetter = (setter: (value: any) => void) => (value: string) => {
     setter(value);
     advanceStep();
@@ -212,8 +220,7 @@ export default function MortgageFlow() {
 
 
   const handleContinue = () => {
-    // This button is now primarily used for steps that are NOT simple selections (i.e., sliders, dropdowns where validation is complex, and final contact forms)
-    advanceStep();
+     advanceStep();
   };
 
   const handleBack = () => {
@@ -225,9 +232,6 @@ export default function MortgageFlow() {
     }
   };
 
-  // --- RENDER HELPERS ---
-
-  // UPDATED: Now uses createAutoAdvanceSetter
   const renderOptionButtons = (options: { id: string; label: string; icon?: string; }[], selected: string | null, setter: (value: string) => void) => {
     const autoAdvanceSetter = createAutoAdvanceSetter(setter);
     return (
@@ -333,10 +337,10 @@ export default function MortgageFlow() {
 
   const renderStepContent = () => {
     if (step === 0) {
-      // Loan Type Screen (using md size)
+      // Loan Type Screen (UPDATED to use 'lg' size)
       return (
         <div className="flex flex-wrap justify-center gap-10">
-          {loanOptions.map((opt) => (
+          {loanOptions.map((opt) => (    
             <CircularSelectionButton
               key={opt.id}
               id={opt.id}
@@ -344,7 +348,7 @@ export default function MortgageFlow() {
               icon={opt.icon}
               selected={loanType === opt.id}
               onClick={() => handleSetLoanType(opt.id)} // Uses specific handleSetLoanType
-              size={'md'}
+              size={'lg'} // <--- MODIFIED TO 'lg'
             />
           ))}
         </div>
@@ -511,7 +515,7 @@ export default function MortgageFlow() {
 
       
       {/* NEW: Flow Summary Component */}
-      <FlowSummary loanType={loanType} step={step} />
+      <FlowSummary loanType={loanType} step={step} />
 
       <div className="w-full flex flex-col items-center justify-center p-4">
         <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">{renderStepTitle()}</h1>
@@ -535,5 +539,5 @@ export default function MortgageFlow() {
         </button>
       </div>
     </div>
-  );b 
+  );
 }
