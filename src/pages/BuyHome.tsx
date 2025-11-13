@@ -109,31 +109,31 @@ const FlowSummary = ({ loanType, step }: FlowSummaryProps) => {
         refinance: "Refinance Loan Application",
     };
 
-    // Calculate progress: steps 1-12 for purchase, 1-18 for others.
-    const totalSteps = loanType === 'purchase' ? 12 : 18;
-    const currentStepIndex = step <= totalSteps ? step : totalSteps; // Cap at totalSteps
-    const progressPercent = Math.round((currentStepIndex / totalSteps) * 100);
+//     // Calculate progress: steps 1-12 for purchase, 1-18 for others.
+//     const totalSteps = loanType === 'purchase' ? 12 : 18;
+//     const currentStepIndex = step <= totalSteps ? step : totalSteps; // Cap at totalSteps
+//     const progressPercent = Math.round((currentStepIndex / totalSteps) * 100);
 
-    return (
-        <div className="w-full max-w-4xl mx-auto mb-8 p-4 bg-white rounded-xl shadow-lg border border-gray-100">
-            <div className="flex justify-between items-center mb-3">
-                <h2 className="text-xl font-bold text-gray-800">
-                    {flowTitleMap[loanType] || 'Loan Application'}
-                </h2>
-                <span className="text-sm font-medium text-[#ED7A1C]">
-                    Step {currentStepIndex} of {totalSteps}
-                </span>
-            </div>
-            
-            <div className="w-full bg-gray-200 rounded-full h-2.5">
-                <div 
-                    className="bg-[#ED7A1C] h-2.5 rounded-full transition-all duration-500 ease-out" 
-                    style={{ width: `${progressPercent}%` }}
-                ></div>
-            </div>
-            <p className="text-right text-xs text-gray-500 mt-1">{progressPercent}% Complete</p>
-        </div>
-    );
+//     return (
+//         <div className="w-full max-w-4xl mx-auto mb-8 p-4 bg-white rounded-xl shadow-lg border border-gray-100">
+//             <div className="flex justify-between items-center mb-3">
+//                 <h2 className="text-xl font-bold text-gray-800">
+//                     {flowTitleMap[loanType] || 'Loan Application'}
+//                 </h2>
+//                 <span className="text-sm font-medium text-[#ED7A1C]">
+//                     Step {currentStepIndex} of {totalSteps}
+//                 </span>
+//             </div>
+//             
+//             <div className="w-full bg-gray-200 rounded-full h-2.5">
+//                 <div 
+//                     className="bg-[#ED7A1C] h-2.5 rounded-full transition-all duration-500 ease-out" 
+//                     style={{ width: `${progressPercent}%` }}
+//                 ></div>
+//             </div>
+//             <p className="text-right text-xs text-gray-500 mt-1">{progressPercent}% Complete</p>
+//         </div>
+//     );
 }
 
 // --- Main Flow Component (Updated step 0 rendering) ---
