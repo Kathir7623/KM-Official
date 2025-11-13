@@ -25,17 +25,17 @@ import Glossary from "../pages/Glossary";
 import Foreclosure from "../pages/Foreclosure";
 
 // Calculators (must match EXACT names in folder)
-import MortgageCalculator from "./pages/calculators/mortgagecalculator";
-import RefinanceCalculator from "./pages/calculators/refinancecalculator";
-import ExtraPaymentCalculator from "./pages/calculators/extrapaymentcalculator";
-import AffordabilityCalculator from "./pages/calculators/affordabilitycalculator";
-import PrincipalCalculator from "./pages/calculators/principalcalculator";
-import TaxBenefitCalculator from "./pages/calculators/TaxBenefitCalculator";
-import APRCalculator from "./pages/calculators/APRCalculator";
-import InterestOnlyCalculator from "./pages/calculators/IntrestonlyCalculator";
-import ShouldIPayPointsCalculator from "./pages/calculators/Shoulipaypointscalculator";
-import IncomeToQualifyCalculator from "./pages/calculators/incometoqualify";
-import BuydownCalculator from "./pages/calculators/BuydownCalculator";
+import MortgageCalculator from "../pages/calculators/mortgagecalculator";
+import RefinanceCalculator from "../pages/calculators/refinancecalculator";
+import ExtraPaymentCalculator from "../pages/calculators/extrapaymentcalculator";
+import AffordabilityCalculator from "../pages/calculators/affordabilitycalculator";
+import PrincipalCalculator from "../pages/calculators/principalcalculator";
+import TaxBenefitCalculator from "../pages/calculators/TaxBenefitCalculator";
+import APRCalculator from "../pages/calculators/APRCalculator";
+import InterestOnlyCalculator from "../pages/calculators/IntrestonlyCalculator";
+import ShouldIPayPointsCalculator from "../pages/calculators/Shoulipaypointscalculator";
+import IncomeToQualifyCalculator from "../pages/calculators/incometoqualify";
+import BuydownCalculator from "../pages/calculators/BuydownCalculator";
 
 export default function Router() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
